@@ -31,39 +31,18 @@ install_php() {
 
 install_php
 
-
-read -p "Введите Steam API Key: " API_KEY
-
-# Try to guess domain automatically if none provided
-read -p "Введите домен (оставьте пустым для локального): " DOMAIN
-if [ -z "$DOMAIN" ]; then
-    if hostname -I >/dev/null 2>&1; then
-        DOMAIN=$(hostname -I | awk '{print $1}')
-    elif command -v ipconfig >/dev/null; then
-        DOMAIN=$(ipconfig getifaddr en0 2>/dev/null || true)
-    fi
-    DOMAIN=${DOMAIN:-127.0.0.1}
-    echo "Определён локальный адрес: $DOMAIN"
-fi
-
-read -p "Задайте пароль для админки: " ADMIN_PASS
-
-cat > "$CONFIG_FILE" <<CFG
-<?php
-return [
-    'STEAM_API_KEY' => '$API_KEY',
-    'DOMAIN' => '$DOMAIN',
-    'ADMIN_PASSWORD' => '$ADMIN_PASS'
-];
-CFG
-
-echo "Конфигурация сохранена в $CONFIG_FILE"
-=======
+# Create config if it doesn't exist
 if [ ! -f "$CONFIG_FILE" ]; then
     cp "$SAMPLE_FILE" "$CONFIG_FILE"
     echo "Создан $CONFIG_FILE. Откройте admin.php для настройки."
 fi
 
+# Ask for domain or use localhost
+read -p "Введите домен (оставьте пустым для localhost): " DOMAIN
+DOMAIN=${DOMAIN:-localhost}
+
+# Update domain in config
+sed -i "s/'DOMAIN' => '[^']*'/'DOMAIN' => '$DOMAIN'/" "$CONFIG_FILE"
 
 echo "Запускаем сервер на http://$DOMAIN:8000"
 php -S 0.0.0.0:8000 &

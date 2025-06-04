@@ -1,5 +1,7 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 require_once 'openid.php';
 $config = require 'config.php';
 $openid = new LightOpenID($config['DOMAIN']);
@@ -17,5 +19,6 @@ if(!$openid->mode){
         header('Location: inventory.php');
     } else {
         echo 'Failed to authenticate';
+        echo '<pre>' . htmlspecialchars(print_r($_GET, true)) . '</pre>';
     }
 }

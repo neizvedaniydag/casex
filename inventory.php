@@ -1,5 +1,7 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 if(!isset($_SESSION['steamid'])) {
     header('Location: login.php');
     exit;
@@ -43,6 +45,8 @@ if(isset($inventory['descriptions'])) {
     if($curlError) {
         echo '<p style="color:red">' . htmlspecialchars($curlError) . '</p>';
     }
+    echo '<pre>JSON error: ' . json_last_error_msg() . '</pre>';
+    echo '<pre>Response snippet: ' . htmlspecialchars(substr($response, 0, 200)) . '</pre>';
 }
 ?>
 </div>
