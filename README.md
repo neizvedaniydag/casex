@@ -1,37 +1,31 @@
-# Case Exchange Example
+# ExchangeCases
 
-This project demonstrates a basic workflow for exchanging CS:GO cases for skins using Steam login.
-It contains a minimal PHP front end and sample scripts.
+This demo shows a basic website where users can log in through Steam and trade CS:GO cases for skins. The application is written in PHP and uses Steam OpenID for authentication.
 
-## Setup
+## Requirements
 
+- PHP 7 or higher with the cURL extension
+- A web server capable of running PHP (the built in server is enough for testing)
 
-You can quickly configure the project with the `setup.sh` script. It installs PHP (if missing),
-creates `config.php` and launches a local server.
+## Installation
 
-```bash
-./setup.sh
-```
-
-Follow the prompts to enter your Steam API key, domain and admin password.
-If you prefer manual setup, copy `config.sample.php` to `config.php` and edit the values.
-=======
-1. Copy `config.sample.php` to `config.php` and fill in your Steam API key and domain.
-2. Place the files on a PHP-enabled web server.
-3. Ensure `openid.php` is available (already included).
-
+1. Copy `config.sample.php` to `config.php`.
+2. Start the server:
+   ```bash
+   php -S localhost:8000
+   ```
+3. Open `http://localhost:8000/admin.php` and enter your Steam API key, domain and admin password. The admin page saves these values into `config.php`.
 
 ## Usage
 
-1. Open `index.php` in your browser.
-2. Log in via Steam.
-3. After login you will see a simple list of your inventory items.
-4. Implement your own backend in `trade.php` to send trade offers with a 30% margin.
+- Visit `index.php` to log in via Steam.
+- After logging in you can view your inventory and initiate a trade. The current trade stub in `trade.php` returns skins worth 70% of the value of the provided cases.
+- Case buttons are loaded from `cases.php`, which returns available case images in JSON format for `scripts/js-choose.js`.
 
-See `docs/steam_exchange_guide.md` for more detailed guidance on integrating with the Steam API.
+## Contributing
 
+Feel free to open issues or pull requests with improvements.
 
-After запуска `setup.sh` вы сможете войти в админ-панель по адресу `admin.php` и
-изменять конфигурацию (API‑ключ, домен, пароль).
-=======
+## License
 
+This project is licensed under the [Apache-2.0](LICENSE) License.
