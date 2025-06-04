@@ -11,10 +11,11 @@ $config = require 'config.php';
 $steamid = $_SESSION['steamid'];
 $url = "https://steamcommunity.com/inventory/{$steamid}/730/2?l=russian&count=5000";
 
-// Use cURL with a browser-like user agent to avoid HTTP 400/403 errors
 $ch = curl_init($url);
+// Request gzip content and let cURL decode it automatically
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
+curl_setopt($ch, CURLOPT_ENCODING, '');
 $response = curl_exec($ch);
 $curlError = null;
 if($response === false) {
