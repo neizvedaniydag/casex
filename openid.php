@@ -187,7 +187,7 @@ class LightOpenID
         return $use_secure_protocol ? 'https://' : 'http://';
     }
 
-    protected function request_curl($url, $method = 'GET', $params = array(), $update_claimed_id = false)
+    protected function request_curl($url, $update_claimed_id = false, $method = 'GET', $params = array())
     {
         $params = http_build_query($params, '', '&');
         $curl = curl_init($url . ($method == 'GET' && $params ? '?' . $params : ''));
@@ -477,7 +477,7 @@ class LightOpenID
         
         return
             $use_curl
-                ? $this->request_curl($url, $method, $params, $update_claimed_id)
+                ? $this->request_curl($url, $update_claimed_id, $method, $params)
                 : $this->request_streams($url, $method, $params, $update_claimed_id);
     }
     

@@ -9,23 +9,40 @@ if(!isset($_SESSION['steamid'])) {
 
 $config = require 'config.php';
 $steamid = $_SESSION['steamid'];
-$url = "https://steamcommunity.com/inventory/{$steamid}/730/2?l=russian&count=5000";
 
-$ch = curl_init($url);
-// Request gzip content and let cURL decode it automatically
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
-$info = null;
-curl_setopt($ch, CURLOPT_ENCODING, '');
-$response = curl_exec($ch);
-$info = curl_getinfo($ch);
-$curlError = null;
-if($response === false) {
-    $curlError = curl_error($ch);
+function fetch_url($url, &$info, &$error) {
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
+    curl_setopt($ch, CURLOPT_ENCODING, '');
+    $body = curl_exec($ch);
+    $info = curl_getinfo($ch);
+    $error = null;
+    if ($body === false) {
+        $error = curl_error($ch);
+    }
+    curl_close($ch);
+    return $body;
 }
-curl_close($ch);
 
+$publicUrl = "https://steamcommunity.com/inventory/{$steamid}/730/2?l=russian&count=5000";
+$response = fetch_url($publicUrl, $info, $curlError);
 $inventory = json_decode($response, true);
+
+if ($info['http_code'] !== 200 || !isset($inventory['descriptions'])) {
+    $apiKey = $config['STEAM_API_KEY'] ?? '';
+    if ($apiKey && $apiKey !== 'YOUR_STEAM_API_KEY') {
+        $apiUrl = "https://api.steampowered.com/IEconItems_730/GetPlayerItems/v1/?key={$apiKey}&steamid={$steamid}";
+        $response = fetch_url($apiUrl, $info, $curlError);
+        $data = json_decode($response, true);
+        if (isset($data['result']['status']) && $data['result']['status'] == 1) {
+            $inventory = ['descriptions' => []];
+            foreach ($data['result']['items'] as $item) {
+                $inventory['descriptions'][] = ['market_hash_name' => $item['name'] ?? ''];
+            }
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>

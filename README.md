@@ -1,6 +1,6 @@
 # ExchangeCases
 
-This demo shows a basic website where users can log in through Steam and trade CS:GO cases for skins. The application is written in PHP and uses Steam OpenID for authentication.
+This demo shows a basic website where users can log in through Steam and trade CS2 cases for skins. The application is written in PHP and uses Steam OpenID for authentication. Inventory data is loaded via Steam's JSON endpoint and, if necessary, the official Web API.
 
 ## Requirements
 
