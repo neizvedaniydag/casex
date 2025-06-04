@@ -1,5 +1,7 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 if(!isset($_SESSION['steamid'])) {
     header('Location: login.php');
     exit;
@@ -27,3 +29,4 @@ $result = [
 
 header('Content-Type: application/json');
 echo json_encode($result);
+echo '\n<pre>' . htmlspecialchars(print_r($_POST, true)) . '</pre>';

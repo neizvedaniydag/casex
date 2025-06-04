@@ -11,9 +11,13 @@ This document provides an overview of the steps required to turn the prototype i
 
 ## 2. Fetching User Inventory
 
-1. Call the Steam Web API endpoint `GetPlayerItems` or use the `GetInventory` JSON endpoint for CS:GO (appid `730`). Example URL:
+1. First try the public JSON endpoint for CS2 inventories:
    ```
    https://steamcommunity.com/inventory/<STEAM_ID>/730/2?l=russian&count=5000
+   ```
+   Steam may occasionally reject direct requests or hide private inventories. In that case use the Web API `IEconItems_730/GetPlayerItems` with your API key:
+   ```
+   https://api.steampowered.com/IEconItems_730/GetPlayerItems/v1/?key=YOUR_KEY&steamid=<STEAM_ID>
    ```
 2. Parse the JSON response to list the user's cases on the site. Each item contains an ID, class information and market hash name.
 3. Display the cases in your existing modal or create a separate inventory page.
