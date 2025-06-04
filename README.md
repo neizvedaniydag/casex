@@ -5,9 +5,15 @@ It contains a minimal PHP front end and sample scripts.
 
 ## Setup
 
-1. Copy `config.sample.php` to `config.php` and fill in your Steam API key and domain.
-2. Place the files on a PHP-enabled web server.
-3. Ensure `openid.php` is available (already included).
+You can quickly configure the project with the `setup.sh` script. It installs PHP (if missing),
+creates `config.php` and launches a local server.
+
+```bash
+./setup.sh
+```
+
+Follow the prompts to enter your Steam API key, domain and admin password.
+If you prefer manual setup, copy `config.sample.php` to `config.php` and edit the values.
 
 ## Usage
 
@@ -17,3 +23,6 @@ It contains a minimal PHP front end and sample scripts.
 4. Implement your own backend in `trade.php` to send trade offers with a 30% margin.
 
 See `docs/steam_exchange_guide.md` for more detailed guidance on integrating with the Steam API.
+
+After запуска `setup.sh` вы сможете войти в админ-панель по адресу `admin.php` и
+изменять конфигурацию (API‑ключ, домен, пароль).
