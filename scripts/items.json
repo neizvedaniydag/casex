@@ -1,0 +1,20 @@
+ {
+    "12345" : {  // уникальный ID товара
+        "name" : "Колокольчик",
+        "cost" : 5,
+        "description" : "Рождественский колокольчик",
+        "image" : "images/bell.png"
+    },
+    "23456" : {
+        "name" : "Шапка",
+        "cost" : 12,
+        "description" : "Шапка Санты Клауса",
+        "image" : "images/hat.png"
+    },
+    "34567" : {
+        "name" : "Подарки",
+        "cost" : 20,
+        "description" : "Рождественские подарки",
+        "image" : "images/presents.png"
+    }
+}        

@@ -1,0 +1,91 @@
+button#case-choose {
+    margin: 0 2.5px;
+    margin-bottom: 5px;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+}
+@media (min-width: 320px) and (max-width: 991px) {
+button#case-choose {
+    width: calc(50% - 10px);
+}
+ /*button#case-choose{
+    width: 231px;
+}*/
+}
+@media (min-width: 992px){
+button#case-choose {
+    width: calc(50% - 133px);
+}
+}
+ .wrapper::-webkit-scrollbar{
+    background: #0e1c29a8; /* цвет фона у дорожки */
+    box-shadow: 0 0 2px rgba(0, 0, 0, .2) inset; /* тень у дорожки */
+    width: 50px;
+    height: 20px;
+    border-radius: 5px;
+
+}        
+.wrapper::-webkit-scrollbar-thumb{
+  background-color:rgba( 0, 0, 0, 0.5 );
+  border-radius: 5px;
+}
+
+/*.horizontal-scroll-wrapper {
+  width: 100px;
+  height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.horizontal-scroll-wrapper > div {
+  width: 100px;
+  height: 100px;
+}
+.horizontal-scroll-wrapper {
+
+  transform: rotate(-90deg);
+  transform-origin: right top;
+}
+.horizontal-scroll-wrapper > div {
+
+  transform: rotate(90deg);
+  transform-origin: right top;
+}.horizontal-scroll-wrapper {
+ 
+  transform:rotate(-90deg) translateY(-100px);
+
+}
+*/
+html, body {
+  overflow-x: hidden;
+}
+.wrapper {
+  display: flex;
+  padding: 1rem;
+  margin: 0 auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  /*outline: solid 1px;*/
+}
+#wrapper > img {
+  /*flex: 0 0 200px;*/
+  height: 130px;
+  background: #7a63bd/*#7bb269*/;
+  color: #222;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-right: 1rem;
+  scroll-snap-align: end;
+}
+body {
+  background: #fafafa;
+  line-height: 1.5;
+  font-family: "Arial";
+}
+* {
+  box-sizing: border-box;
+}
+
+
+
+
+
