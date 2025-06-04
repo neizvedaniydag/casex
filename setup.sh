@@ -31,6 +31,7 @@ install_php() {
 
 install_php
 
+
 read -p "Введите Steam API Key: " API_KEY
 
 # Try to guess domain automatically if none provided
@@ -57,6 +58,12 @@ return [
 CFG
 
 echo "Конфигурация сохранена в $CONFIG_FILE"
+=======
+if [ ! -f "$CONFIG_FILE" ]; then
+    cp "$SAMPLE_FILE" "$CONFIG_FILE"
+    echo "Создан $CONFIG_FILE. Откройте admin.php для настройки."
+fi
+
 
 echo "Запускаем сервер на http://$DOMAIN:8000"
 php -S 0.0.0.0:8000 &
