@@ -8,7 +8,6 @@ if(!isset($_SESSION['steamid'])) {
 $config = require 'config.php';
 $steamid = $_SESSION['steamid'];
 $url = "https://steamcommunity.com/inventory/{$steamid}/730/2?l=russian&count=5000";
-
 // Use cURL with a browser-like user agent to avoid HTTP 400/403 errors
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
