@@ -43,6 +43,7 @@ if (!isset($_SESSION['admin'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $config['STEAM_API_KEY'] = $_POST['STEAM_API_KEY'] ?? $config['STEAM_API_KEY'];
     $config['DOMAIN'] = $_POST['DOMAIN'] ?? $config['DOMAIN'];
+    $config['BOT_STEAM_ID'] = $_POST['BOT_STEAM_ID'] ?? $config['BOT_STEAM_ID'];
     if (!empty($_POST['ADMIN_PASSWORD'])) {
         $config['ADMIN_PASSWORD'] = $_POST['ADMIN_PASSWORD'];
     }
@@ -66,6 +67,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </label><br>
     <label>Домен:
         <input type="text" name="DOMAIN" value="<?php echo htmlspecialchars($config['DOMAIN']); ?>">
+    </label><br>
+    <label>Steam ID бота:
+        <input type="text" name="BOT_STEAM_ID" value="<?php echo htmlspecialchars($config['BOT_STEAM_ID']); ?>">
     </label><br>
     <label>Новый пароль:
         <input type="password" name="ADMIN_PASSWORD" placeholder="Не менять">
