@@ -1,37 +1,23 @@
 # Case Exchange Example
 
-This project demonstrates a basic workflow for exchanging CS:GO cases for skins using Steam login.
-It contains a minimal PHP front end and sample scripts.
+This repository provides a minimal PHP demo for exchanging CS:GO cases for skins. Users authenticate via Steam and you manage the site settings in a small admin panel.
 
-## Setup
+## Prerequisites
 
+* PHP 7.4 or newer with the `curl` extension.
 
-You can quickly configure the project with the `setup.sh` script. It installs PHP (if missing),
-creates `config.php` and launches a local server.
+## Quick start
 
-```bash
-./setup.sh
-```
+1. Run `./setup.sh` to launch a local PHP server. The script will create `config.php` from `config.sample.php` if needed.
+2. Open `http://localhost:8000/admin.php` in your browser and fill in your Steam API key, domain and admin password.
+3. Visit `index.php` to log in through Steam and try the demo inventory exchange.
 
-Follow the prompts to enter your Steam API key, domain and admin password.
-If you prefer manual setup, copy `config.sample.php` to `config.php` and edit the values.
-=======
-1. Copy `config.sample.php` to `config.php` and fill in your Steam API key and domain.
-2. Place the files on a PHP-enabled web server.
-3. Ensure `openid.php` is available (already included).
+To deploy on another server, copy the project to any PHP-enabled hosting and ensure `config.php` is writable by the web server.
 
+## License
 
-## Usage
+This project is released under the MIT License. See [LICENSE](LICENSE) for details.
 
-1. Open `index.php` in your browser.
-2. Log in via Steam.
-3. After login you will see a simple list of your inventory items.
-4. Implement your own backend in `trade.php` to send trade offers with a 30% margin.
+## Contributing
 
-See `docs/steam_exchange_guide.md` for more detailed guidance on integrating with the Steam API.
-
-
-After запуска `setup.sh` вы сможете войти в админ-панель по адресу `admin.php` и
-изменять конфигурацию (API‑ключ, домен, пароль).
-=======
-
+Pull requests and improvements are welcome.
