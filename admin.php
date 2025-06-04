@@ -55,6 +55,7 @@ if (!isset($_SESSION['admin'])) {
 // handle settings update
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $config['STEAM_API_KEY'] = $_POST['STEAM_API_KEY'] ?? $config['STEAM_API_KEY'];
+    $config['STEAM_APIS_KEY'] = $_POST['STEAM_APIS_KEY'] ?? $config['STEAM_APIS_KEY'];
     $config['DOMAIN'] = $_POST['DOMAIN'] ?? $config['DOMAIN'];
     if (!empty($_POST['ADMIN_PASSWORD'])) {
         $config['ADMIN_PASSWORD'] = $_POST['ADMIN_PASSWORD'];
@@ -81,6 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <form method="post">
     <label>Steam API Key:
         <input type="text" name="STEAM_API_KEY" value="<?php echo htmlspecialchars($config['STEAM_API_KEY']); ?>">
+    </label><br>
+    <label>SteamApis Key:
+        <input type="text" name="STEAM_APIS_KEY" value="<?php echo htmlspecialchars($config['STEAM_APIS_KEY']); ?>">
     </label><br>
     <label>Домен:
         <input type="text" name="DOMAIN" value="<?php echo htmlspecialchars($config['DOMAIN']); ?>">

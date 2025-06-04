@@ -1,6 +1,6 @@
 # ExchangeCases
 
-This demo shows a basic website where users can log in through Steam and trade CS2 cases for skins. The application is written in PHP and uses Steam OpenID for authentication. Inventory data is loaded via Steam's JSON endpoint and, if necessary, Valve's newer Inventory Service API.
+This demo shows a basic website where users can log in through Steam and trade CS2 cases for skins. The application is written in PHP and uses Steam OpenID for authentication. Inventory data is loaded via Steam's JSON endpoint and, if necessary, Valve's newer Inventory Service API. As a last resort you can supply a key for SteamApis.com to fetch inventory through their proxy network.
 
 ## Requirements
 
@@ -14,7 +14,7 @@ This demo shows a basic website where users can log in through Steam and trade C
    ```bash
    php -S localhost:8000
    ```
-3. Open `http://localhost:8000/admin.php` to configure your Steam API key and optional domain. By default the site runs at `http://localhost:8000`.
+3. Open `http://localhost:8000/admin.php` to configure your Steam API key, optional SteamApis key and the domain. By default the site runs at `http://localhost:8000`.
 
 ## Contributing
 

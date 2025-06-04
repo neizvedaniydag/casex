@@ -20,6 +20,11 @@ This document provides an overview of the steps required to turn the prototype i
    https://inventory.steampowered.com/GetInventory/v1/?key=YOUR_KEY&steamid=<STEAM_ID>&appid=730&contextid=2
    ```
    The older `IEconItems_730/GetPlayerItems` endpoint is kept as a fallback.
+   As an alternative you may supply a key for [SteamApis.com](https://steamapis.com/) and call
+   ```
+   https://api.steamapis.com/steam/inventory/<STEAM_ID>/730/2?api_key=YOUR_STEAMAPIS_KEY
+   ```
+   This service routes requests through proxies to avoid rate limits.
 2. Parse the JSON response to list the user's cases on the site. Each item contains an ID, class information and market hash name.
 3. Display the cases in your existing modal or create a separate inventory page.
 

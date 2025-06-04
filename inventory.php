@@ -46,6 +46,18 @@ if ($info['http_code'] !== 200 || !isset($inventory['descriptions'])) {
             }
         }
     }
+    if (!isset($inventory['descriptions'])) {
+        $steamApis = $config['STEAM_APIS_KEY'] ?? '';
+        if ($steamApis && $steamApis !== 'YOUR_STEAMAPIS_KEY') {
+            $apiUrl = "https://api.steamapis.com/steam/inventory/{$steamid}/730/2?api_key={$steamApis}";
+            $response = fetch_url($apiUrl, $info, $curlError);
+            $usedUrl = $apiUrl;
+            $data = json_decode($response, true);
+            if (isset($data['descriptions'])) {
+                $inventory = $data;
+            }
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
