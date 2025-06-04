@@ -15,8 +15,10 @@ $ch = curl_init($url);
 // Request gzip content and let cURL decode it automatically
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
+$info = null;
 curl_setopt($ch, CURLOPT_ENCODING, '');
 $response = curl_exec($ch);
+$info = curl_getinfo($ch);
 $curlError = null;
 if($response === false) {
     $curlError = curl_error($ch);
@@ -43,6 +45,9 @@ if(isset($inventory['descriptions'])) {
     }
 } else {
     echo '<p>Не удалось загрузить инвентарь.</p>';
+    if($info) {
+        echo '<pre>HTTP code: ' . $info['http_code'] . '</pre>';
+    }
     if($curlError) {
         echo '<p style="color:red">' . htmlspecialchars($curlError) . '</p>';
     }

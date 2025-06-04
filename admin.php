@@ -2,6 +2,12 @@
 session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+$action = $_GET['action'] ?? '';
+if($action === 'logout') {
+    unset($_SESSION['admin']);
+    header('Location: admin.php');
+    exit;
+}
 $configFile = 'config.php';
 if (file_exists($configFile)) {
     $config = require $configFile;
@@ -84,6 +90,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </label><br>
     <button type="submit">Сохранить</button>
 </form>
-<p><a href="index.php">На главную</a></p>
+<p>
+    <a href="index.php">На главную</a> |
+    <a href="admin.php?action=logout">Выйти</a>
+</p>
 </body>
 </html>

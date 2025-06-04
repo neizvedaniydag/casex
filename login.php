@@ -20,5 +20,6 @@ if(!$openid->mode){
     } else {
         echo 'Failed to authenticate';
         echo '<pre>' . htmlspecialchars(print_r($_GET, true)) . '</pre>';
+        echo '<pre>SERVER: ' . htmlspecialchars(print_r($_SERVER, true)) . '</pre>';
     }
 }

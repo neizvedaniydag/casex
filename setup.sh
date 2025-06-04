@@ -38,13 +38,13 @@ if [ ! -f "$CONFIG_FILE" ]; then
 fi
 
 # Ask for domain or use localhost
-read -p "Введите домен (оставьте пустым для localhost): " DOMAIN
-DOMAIN=${DOMAIN:-localhost}
+read -p "Введите домен (ENTER для http://localhost:8000): " DOMAIN
+DOMAIN=${DOMAIN:-http://localhost:8000}
 
 # Update domain in config
-sed -i "s/'DOMAIN' => '[^']*'/'DOMAIN' => '$DOMAIN'/" "$CONFIG_FILE"
+sed -i "s|'DOMAIN' => '[^']*'|'DOMAIN' => '$DOMAIN'|" "$CONFIG_FILE"
 
-echo "Запускаем сервер на http://$DOMAIN:8000"
+echo "Запускаем сервер на $DOMAIN"
 php -S 0.0.0.0:8000 &
 PID=$!
 echo "Нажмите Ctrl+C чтобы остановить сервер"

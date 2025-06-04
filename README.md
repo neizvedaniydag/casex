@@ -10,11 +10,11 @@ This demo shows a basic website where users can log in through Steam and trade C
 ## Installation
 
 1. Copy `config.sample.php` to `config.php`.
-2. Start the server:
+2. Start the server on port 8000:
    ```bash
    php -S localhost:8000
    ```
-3. Open `http://localhost:8000/admin.php` to set your Steam API key, domain and admin password. Settings are saved in `config.php`.
+3. Open `http://localhost:8000/admin.php` to configure your Steam API key and optional domain. By default the site runs at `http://localhost:8000`.
 
 ## Contributing
 
