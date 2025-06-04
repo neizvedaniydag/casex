@@ -42,7 +42,11 @@ read -p "Введите домен (ENTER для http://localhost:8000): " DOMAI
 DOMAIN=${DOMAIN:-http://localhost:8000}
 
 # Update domain in config
-sed -i "s|'DOMAIN' => '[^']*'|'DOMAIN' => '$DOMAIN'|" "$CONFIG_FILE"
+if sed --version >/dev/null 2>&1; then
+    sed -i "s|'DOMAIN' => '[^']*'|'DOMAIN' => '$DOMAIN'|" "$CONFIG_FILE"
+else
+    sed -i '' "s|'DOMAIN' => '[^']*'|'DOMAIN' => '$DOMAIN'|" "$CONFIG_FILE"
+fi
 
 echo "Запускаем сервер на $DOMAIN"
 php -S 0.0.0.0:8000 &
