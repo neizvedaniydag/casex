@@ -1,5 +1,7 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 if(!isset($_SESSION['steamid'])) {
     header('Location: login.php');
     exit;
@@ -9,11 +11,14 @@ $config = require 'config.php';
 $steamid = $_SESSION['steamid'];
 $url = "https://steamcommunity.com/inventory/{$steamid}/730/2?l=russian&count=5000";
 
-// Use cURL with a browser-like user agent to avoid HTTP 400/403 errors
 $ch = curl_init($url);
+// Request gzip content and let cURL decode it automatically
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
+$info = null;
+curl_setopt($ch, CURLOPT_ENCODING, '');
 $response = curl_exec($ch);
+$info = curl_getinfo($ch);
 $curlError = null;
 if($response === false) {
     $curlError = curl_error($ch);
@@ -40,9 +45,14 @@ if(isset($inventory['descriptions'])) {
     }
 } else {
     echo '<p>Не удалось загрузить инвентарь.</p>';
+    if($info) {
+        echo '<pre>HTTP code: ' . $info['http_code'] . '</pre>';
+    }
     if($curlError) {
         echo '<p style="color:red">' . htmlspecialchars($curlError) . '</p>';
     }
+    echo '<pre>JSON error: ' . json_last_error_msg() . '</pre>';
+    echo '<pre>Response snippet: ' . htmlspecialchars(substr($response, 0, 200)) . '</pre>';
 }
 ?>
 </div>
